@@ -3,4 +3,9 @@
 
 (defpackage :smithzv.clann
   (:use :cl :index-mapped-arrays :iterate)
-  (:export))
+  (:export
+   #:layer
+   #:clan-net
+   #:generate-lisp-array
+   #:make-network
+   #:network-list))
