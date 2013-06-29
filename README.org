@@ -1,0 +1,72 @@
+
+* CLANN
+
+CLANN is an artificial neural network framework for Common Lisp.
+
+This could be used as part of a larger machine learning library.
+
+* Features
+
+In case you haven't noticed, CLANN currently does nothing.
+
+** Goals
+
+- Well documented
+- Feed-forward networks
+- Recurrent networks
+- Very flexible network design
+- Easy training interface that does the right thing out of the box (but doesn't
+  hide it from you)
+- Maintain flexibility for easy changes/improvements/experimentation
+- Designed from the ground up with a high performance matrix representation of
+  NN
+  - Code for forward propagation/prediction and back propagation will be, where
+    possible, performed by BLAS libraries, opening the door for high performance
+    on properly tuned systems (think Atlas or perhaps CUBLAS for transparent GPU
+    execution)
+  - Include fall back code for systems that are not configured properly, though
+    you probably won't want to use it
+
+** Potential Goals
+
+I purposefully want to leave the long term goals vague at this time as I want
+this to be flexible that it will support a wide variety of NN models such as
+Hopfield networks, Boltzmann machines, and perhaps HTMs.
+
+* Documentation and User Manual
+
+CLANN is a literate library although the literate programming system that it
+uses has not been written yet, (well, it's working and available for download,
+but doesn't have all of the features I use yet).  The documentation is there,
+however, it is in the source embedded in normal Lisp comments.
+
+I will attempt to get Literate-Lisp up to snuff at least to the point where I or
+you can build a manual for the project.
+
+* Dependencies
+
+CLANN wants to use several C libraries, but will (hopefully) use Lisp
+alternatives where appropriate.  In any case, the Lisp libraries will be (to the
+best of my ability) limited to libraries that I produce or that are available in
+Quicklisp.
+
+- Iterate
+- Index-Mapped-Arrays
+
+* Origin and context
+
+CLANN is being written as part of the Lisp In Summer Projects 2013
+competition/activity.  The author at this time is fairly new to the topic, but
+has recently completed some Coursera courses on Neural Networks (by Geoff
+Hinton) and Machine Learning in general (by Andrew Ng) and would like to have a
+hobby implementation that will hopefully bloom into something much more.  Either
+way, this is certainly a learning experience for me.
+
+* License and contributors
+
+CLANN is and always will be Free Software.  I am releasing under the Lesser Lisp
+GPL.
+
+This software is currently part of an individual competition until mid
+September.  Any contributions might have to be put on hold until this deadline
+is met.
