@@ -1,0 +1,7 @@
+
+* Harlan
+
+See if [[https://github.com/eholk/harlan][Harlan]] is a good fit for the code that cannot be GPU-ized via cublas or
+the like.
+
+Build a DSL for outputting Harlan from Common Lisp.
