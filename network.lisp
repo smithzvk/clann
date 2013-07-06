@@ -1,5 +1,5 @@
 
-(in-package :smithzv.clann)
+(in-package :clann)
 
 ;; @A network is a list of index-mapped-arrays.  These IMAs represents the
 ;; weight matrices (including the bias row).  <<Make-network>> will generate a

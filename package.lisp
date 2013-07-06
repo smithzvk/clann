@@ -1,7 +1,7 @@
 
 (in-package :cl-user)
 
-(defpackage :smithzv.clann
+(defpackage :clann
   (:use :cl :index-mapped-arrays :iterate)
   (:export
    #:layer
