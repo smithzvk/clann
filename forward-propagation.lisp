@@ -1,7 +1,7 @@
 
 (in-package :clann)
 
-(defun sigmoid (x) (/ (+ 1 (exp (- x)))))
+(defun logistic (x) (/ (+ 1 (exp (- x)))))
 
 (defun forward-propagation (inputs network)
   (let ((nl (network-list network))
@@ -18,4 +18,4 @@
                               (first a*))
                         1))
                       (ima:transpose th))
-             a* (collecting (ima:map-ima 'sigmoid (unmap-into 'array z*))))))))
+             a* (collecting (ima:map-ima 'logistic (unmap-into 'array z*))))))))
