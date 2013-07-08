@@ -3,19 +3,22 @@
 
 (defun logistic (x) (/ (+ 1 (exp (- x)))))
 
+(defun add-biases (arr)
+  (unmap-into
+   'array
+   (append-imas
+    (list (make-list (ima-dimension arr 0)
+                     :initial-element '(1))
+          arr)
+    1)))
+
 (defun forward-propagation (inputs network)
   (let ((nl (network-list network))
-        (z* nil)
-        (a* (list inputs)))
+        (z nil)
+        (a (list (add-biases inputs))))
     (cons
-     (first a*)
+     (first a)
      (iter (for (th units) :in nl)
-       (setf z* (bm:* (unmap-into
-                       'array
-                       (append-imas
-                        (list (make-list (ima-dimension (first a*) 0)
-                                         :initial-element '(1))
-                              (first a*))
-                        1))
-                      (ima:transpose th))
-             a* (collecting (ima:map-ima 'logistic (unmap-into 'array z*))))))))
+       (setf z (bm:* (first a) (ima:transpose th))
+             a (collecting
+                (add-biases (ima:map-ima 'logistic (unmap-into 'array z)))))))))
