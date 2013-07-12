@@ -32,7 +32,7 @@
         (z nil)
         (a inputs))
     (iter (for (th units) :in nl)
-      (setf z (bm:* (add-biases a) (ima:transpose th))
+      (setf z (m*m (add-biases a) (ima:transpose th))
             a (ima:map-ima 'logistic (unmap-into 'array z)))
       (collect a))))
 
