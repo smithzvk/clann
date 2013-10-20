@@ -11,7 +11,8 @@
 
 ;; <<>>=
 (defclass clan-net ()
-  ((network-list :accessor network-list :initarg :network-list :initform nil)))
+  ((network-list :accessor network-list :initarg :network-list :initform nil)
+   (unit-values :accessor unit-values :initarg :unit-values :initform nil)))
 
 ;; @The network will be printed as...
 
@@ -60,8 +61,8 @@
 
 ;; <<>>=
 (defun make-network (layers
-                         &key (initialize-weights 0.01d0)
-                              (matrix-generation-fn #'generate-lisp-array))
+                     &key (initialize-weights 0.01d0)
+                          (matrix-generation-fn #'generate-lisp-array))
   "Make a neural network with the given layer specification.  LAYERS is a list
 with one element per layer \(counting the input and output as layers).  Each
 element in LAYERS should be either an integer \(specifying the number of units
@@ -80,17 +81,25 @@ return randoms numbers when called."
     (make-instance
      'clan-net
      :network-list
-     (iter (for (n-units . rest-layer) in (mapcar
-                                           'alexandria:ensure-list
-                                           (rest layers)))
-       (for last-n-units previous n-units)
+     (iter (for (n-units . rest-layer) :in (mapcar
+                                            'alexandria:ensure-list
+                                            (rest layers)))
+       (for last-n-units :previous n-units)
        (destructuring-bind (&key (unit-type 'logistic))
            rest-layer
-         (collecting
-          (list (funcall matrix-generation-fn n-units
-                         (1+ (or last-n-units n-inputs))
-                         fn)
-                unit-type)))))))
+         (let ((unit-type (if (listp unit-type)
+                              unit-type
+                              (make-list (or last-n-units n-inputs)
+                                         :initial-element unit-type))))
+           (collecting
+            (list (funcall matrix-generation-fn n-units
+                           (1+ (or last-n-units n-inputs))
+                           fn)
+                  unit-type)))))
+     :unit-values
+     (iter (for n-units :in (mapcar 'alexandria:ensure-car (rest layers)))
+       (collecting
+        (make-array n-units :initial-element 0d0))))))
 
 ;; @The function <<generate-lisp-array>> will create a new matrix (represented
 ;; as a Lisp array) whose elements are sampled from the function <fn>, which
