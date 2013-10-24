@@ -36,4 +36,4 @@
           (map-ima (lambda (x) (/ x batch-size))
                    (unmap-into
                     'array
-                    (transpose (m:* (transpose (add-biases a)) p-delta))))))))))
+                    (transpose (m*m (transpose (add-biases a)) p-delta))))))))))
