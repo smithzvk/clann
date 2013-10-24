@@ -6,6 +6,7 @@
   :serial t
   :components ((:file "package")
                (:file "utils")
+               (:file "network")
                (:file "forward-propagation")
                (:file "back-propagation")
                (:file "train")))
